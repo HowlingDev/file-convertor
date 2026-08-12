@@ -37,6 +37,20 @@
                 <version>4.1.0</version>
                 <scope>test</scope>
             </dependency>
+
+            <!-- Source: https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka -->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>4.1.0</version>
+            </dependency>
+            <!-- Source: https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-test -->
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka-test</artifactId>
+                <version>4.1.0</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

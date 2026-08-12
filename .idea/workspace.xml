@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0380e33f-0f1c-428c-921f-965f00fbd611" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
@@ -21,6 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Yml_File" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,6 +70,7 @@
         <entry key="Application">
           <value>
             <map>
+              <entry key="FileConversionServiceApplication" value="STOPPED" />
               <entry key="file-conversion-service" value="STOPPED" />
             </map>
           </value>
