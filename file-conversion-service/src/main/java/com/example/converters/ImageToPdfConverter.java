@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 @Component
-public class ImageToPdfConverter extends Converter {
+public class ImageToPdfConverter extends Converter implements Convertible {
 
     @Override
     public boolean supports(String fileType) {

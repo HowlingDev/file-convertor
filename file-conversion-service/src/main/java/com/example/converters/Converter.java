@@ -19,10 +19,6 @@ public abstract class Converter {
 
     private MinioClient minioClient;
 
-    public abstract boolean supports(String fileType);
-
-    public abstract void convertToPdf(String fileName) throws Exception;
-
     public InputStream download(String fileName) throws Exception {
         return minioClient.getObject(
                 GetObjectArgs.builder()

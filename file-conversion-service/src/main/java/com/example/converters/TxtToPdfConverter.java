@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 @Component
-public class TxtToPdfConverter extends Converter {
+public class TxtToPdfConverter extends Converter implements Convertible {
 
     @Override
     public boolean supports(String fileType) {
