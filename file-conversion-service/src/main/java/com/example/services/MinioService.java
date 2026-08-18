@@ -1,15 +1,14 @@
 package com.example.services;
 
 import io.minio.*;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MinioService {
 
     private final MinioClient minioClient;
@@ -26,14 +25,14 @@ public class MinioService {
                         .build());
     }
 
-    public void upload(MultipartFile file, String fileName) throws Exception {
+    public void upload(InputStream data, String fileName) throws Exception {
 
         minioClient.putObject(
                 PutObjectArgs.builder()
                         .bucket(bucket)
                         .object(fileName)
-                        .stream(file.getInputStream(), file.getSize(), 10485760)
-                        .contentType("application/pdf")
+                        .stream(data, -1, 10485760)
+                        .contentType(bucket)
                         .build());
     }
 

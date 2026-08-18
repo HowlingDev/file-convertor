@@ -7,8 +7,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class FileConvertedEvent {
-
+public class ConvertFileToPdfEvent {
     UUID eventId;
-    String pdfUrl;
+    String fileUrl;
 }

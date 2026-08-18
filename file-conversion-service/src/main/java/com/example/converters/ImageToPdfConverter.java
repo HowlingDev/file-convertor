@@ -3,42 +3,44 @@ package com.example.converters;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.graphics.image.LosslessFactory;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.stereotype.Component;
 
-import java.io.ByteArrayOutputStream;
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 
 @Component
-public class ImageToPdfConverter extends Converter implements Convertible {
+public class ImageToPdfConverter implements Converter {
+
+    private final List<String> supportedFormats = List.of("jpg", "jpeg", "jpe", "jfif", "png");
 
     @Override
     public boolean supports(String fileType) {
-        return fileType.equals("jpg") || fileType.equals("png");
+        return supportedFormats.contains(fileType);
     }
 
     @Override
-    public void convertToPdf(String fileName) throws Exception {
+    public void convertToPdf(InputStream data, String fileName) throws Exception {
 
-        super.createBucketIfNotExists();
-
-        String newFileName = super.replaceExtension(fileName, ".pdf");
-
-        try (InputStream inputStream = super.download(fileName);
-             PDDocument doc = new PDDocument();
-             ByteArrayOutputStream out = new ByteArrayOutputStream()
-        ) {
-            byte[] imageBytes = inputStream.readAllBytes();
-            PDPage myPage = new PDPage();
-            doc.addPage(myPage);
-            PDImageXObject pdImage = PDImageXObject.createFromByteArray(doc, imageBytes, newFileName);
-
-            try (PDPageContentStream cont = new PDPageContentStream(doc, myPage)) {
-                cont.drawImage(pdImage, 20, 20, pdImage.getWidth(), pdImage.getHeight());
+        try (PDDocument doc = new PDDocument()) {
+            PDPage page = new PDPage();
+            doc.addPage(page);
+            PDImageXObject pdImage = LosslessFactory.createFromImage(doc, ImageIO.read(data));
+            double scale = Math.min((double) page.getMediaBox().getWidth() / pdImage.getWidth(),
+                    (double) page.getMediaBox().getHeight() / pdImage.getHeight());
+            try (PDPageContentStream cont = new PDPageContentStream(doc, page)) {
+                cont.drawImage(pdImage, 20, 20, (int) (pdImage.getWidth() * scale),
+                        (int) (pdImage.getHeight() * scale));
             }
-
-            doc.save(out);
-            super.upload(out.toByteArray(), newFileName);
+            doc.save(new File("C:/Users/user/Desktop/" + createPdfFileName(fileName)));
         }
+    }
+
+    private String createPdfFileName(String fileName) {
+        int dotIndex = fileName.lastIndexOf(".");
+        return fileName.substring(0, dotIndex) + ".pdf";
     }
 }
