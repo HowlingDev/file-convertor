@@ -29,7 +29,7 @@ public class TxtToPdfConverter implements Converter {
     }
 
     @Override
-    public void convertToPdf(InputStream data, String fileName) throws Exception {
+    public String convertToPdf(InputStream data, String fileName) {
 
         String line;
 
@@ -73,7 +73,11 @@ public class TxtToPdfConverter implements Converter {
                 contentStream.close();
             }
 
-            doc.save(new File("C:/Users/user/Desktop/" + createPdfFileName(fileName)));
+            String dir = "C:/Users/user/Desktop/" + Converter.replaceExtension(fileName, "pdf");
+            doc.save(new File(dir));
+            return dir;
+        } catch (IOException e) {
+            return "";
         }
     }
 
@@ -86,10 +90,7 @@ public class TxtToPdfConverter implements Converter {
                 .toList();
     }
 
-    private String createPdfFileName(String fileName) {
-        int dotIndex = fileName.lastIndexOf(".");
-        return fileName.substring(0, dotIndex) + ".pdf";
-    }
+
 
     private int avgCharsInLine(PDFont font) throws IOException {
         float availableWidth = PDRectangle.A4.getWidth() - MARGIN_LEFT;

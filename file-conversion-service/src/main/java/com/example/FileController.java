@@ -35,4 +35,12 @@ public class FileController {
 
         return "demobucket/logo.pdf";
     }
+
+    @GetMapping("/get/zip")
+    public String getZipFile() throws Exception {
+
+        return fileConversionService.convertZip("testzip.zip");
+
+//        return "demobucket/testzip.pdf";
+    }
 }

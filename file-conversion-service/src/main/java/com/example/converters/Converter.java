@@ -6,5 +6,10 @@ public interface Converter {
 
     boolean supports(String fileType);
 
-    void convertToPdf(InputStream data, String fileName) throws Exception;
+    String convertToPdf(InputStream data, String fileName);
+
+    static String replaceExtension(String fileName, String extension) {
+        int dotIndex = fileName.lastIndexOf(".");
+        return fileName.substring(0, dotIndex + 1) + extension;
+    }
 }

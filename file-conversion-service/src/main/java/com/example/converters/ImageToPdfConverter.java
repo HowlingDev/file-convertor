@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ImageToPdfConverter implements Converter {
     }
 
     @Override
-    public void convertToPdf(InputStream data, String fileName) throws Exception {
+    public String convertToPdf(InputStream data, String fileName) {
 
         try (PDDocument doc = new PDDocument()) {
             PDPage page = new PDPage();
@@ -35,12 +36,11 @@ public class ImageToPdfConverter implements Converter {
                 cont.drawImage(pdImage, 20, 20, (int) (pdImage.getWidth() * scale),
                         (int) (pdImage.getHeight() * scale));
             }
-            doc.save(new File("C:/Users/user/Desktop/" + createPdfFileName(fileName)));
+            String dir = "C:/Users/user/Desktop/" + Converter.replaceExtension(fileName, "pdf");
+            doc.save(new File(dir));
+            return dir;
+        } catch (IOException e) {
+            return "";
         }
-    }
-
-    private String createPdfFileName(String fileName) {
-        int dotIndex = fileName.lastIndexOf(".");
-        return fileName.substring(0, dotIndex) + ".pdf";
     }
 }

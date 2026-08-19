@@ -9,6 +9,9 @@
       <item index="4" class="java.lang.String" itemvalue="org.springframework.stereotype.Component" />
       <item index="5" class="java.lang.String" itemvalue="org.springframework.web.bind.annotation.GetMapping" />
     </list>
+    <writeAnnotations>
+      <writeAnnotation name="org.springframework.beans.factory.annotation.Value" />
+    </writeAnnotations>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
