@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 @Service
@@ -17,40 +16,23 @@ public class MinioService {
     @Value("${minio.bucket}")
     private String bucket;
 
-    public InputStream download(String fileName)  {
+    public InputStream download(String fileName) throws Exception {
 
-        try (InputStream inputStream = minioClient.getObject(
+        return minioClient.getObject(
                 GetObjectArgs.builder()
                         .bucket(bucket)
                         .object(fileName)
-                        .build())) {
-            return inputStream;
-        } catch (Exception e) {
-            return InputStream.nullInputStream();
-        }
-
+                        .build());
     }
 
-    public void upload(InputStream data, String fileName) throws IOException {
+    public void upload(InputStream data, String fileName) throws Exception{
 
-        try {
-            minioClient.putObject(
+        minioClient.putObject(
                     PutObjectArgs.builder()
                             .bucket(bucket)
                             .object(fileName)
                             .stream(data, -1, 10485760)
-                            .contentType(bucket)
+                            .contentType("application/pdf")
                             .build());
-        } catch (Exception e) {
-            throw new IOException();
-        }
-    }
-
-    public void createBucketIfNotExists() throws Exception {
-        boolean exists = minioClient.bucketExists(
-                BucketExistsArgs.builder().bucket(bucket).build());
-        if (!exists) {
-            minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucket).build());
-        }
     }
 }

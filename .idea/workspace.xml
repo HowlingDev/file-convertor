@@ -5,20 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0380e33f-0f1c-428c-921f-965f00fbd611" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/FileConversionEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/FileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/converters/ZipToPdfConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/converters/ZipToPdfConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/ConvertFileToPdfEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/ConvertFileToPdfEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/FileConversionFailedEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/FileConvertedEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/InboxEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/InboxEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/OutboxEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/OutboxEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/FileConversionEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/events/FileConversionEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/MinioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/MinioService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
@@ -34,6 +30,7 @@
         <option value="Yml_File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -58,7 +55,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.FileConversionServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.file-conversion-service.executor&quot;: &quot;Run&quot;,
+    &quot;Application.file-conversion-service.executor&quot;: &quot;Debug&quot;,
     &quot;Maven.file-convertor [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.file-convertor [install].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
@@ -132,40 +129,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/FileController.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java</url>
-          <line>18</line>
-          <properties class="com.example.services.KafkaFileListenerService" method="handleConvertFileToPdfEvent">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

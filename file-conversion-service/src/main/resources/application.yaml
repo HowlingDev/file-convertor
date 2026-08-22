@@ -13,6 +13,9 @@ logging:
   level:
     org.springframework.kafka: INFO
     org.apache.kafka: INFO
+    org.springframework.kafka.transaction: TRACE
+    org.springframework.transaction: TRACE
+
 spring:
   application:
     name: file-conversion-service

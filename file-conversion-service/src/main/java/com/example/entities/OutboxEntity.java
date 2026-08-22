@@ -1,7 +1,16 @@
 package com.example.entities;
 
-import jakarta.persistence.*;
+import com.example.events.FileConversionEvent;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -9,6 +18,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "outbox")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class OutboxEntity {
 
     @Id
@@ -16,7 +28,8 @@ public class OutboxEntity {
     private UUID event_id;
 
     @Column(name = "payload", columnDefinition = "JSONB NOT NULL")
-    private String payload;
+    @JdbcTypeCode(SqlTypes.JSON)
+    private FileConversionEvent payload;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMPTZ NOT NULL DEFAULT now()")
     private OffsetDateTime created_at;

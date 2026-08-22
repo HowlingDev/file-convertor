@@ -13,8 +13,7 @@ public class KafkaFileListenerService {
 
     @KafkaListener(
             topics = "convert-to-pdf-topic",
-            groupId = "${spring.kafka.consumer.group-id}",
-            containerFactory = "convertFileKafkaListenerContainerFactory"
+            groupId = "${spring.kafka.consumer.group-id}"
     )
     public void handleConvertFileToPdfEvent(ConvertFileToPdfEvent event) {
         fileConversionService.convertFileToPdf(event);
