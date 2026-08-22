@@ -1,46 +1,25 @@
 package com.example;
 
-import com.example.services.FileConversionService;
-import lombok.AllArgsConstructor;
+import com.example.events.ConvertFileToPdfEvent;
+import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/file")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FileController {
-    private FileConversionService fileConversionService;
 
-    @GetMapping("/get/txt")
-    public String getTxtFile() throws Exception {
+    private final KafkaTemplate<String, ConvertFileToPdfEvent> kafkaTemplate;
 
-        fileConversionService.convertTxt("testfile.txt");
-
-        return "demobucket/testfile.pdf";
+    @GetMapping("/kafka/get/txt")
+    public void getTxtFileWithKafka() {
+        kafkaTemplate.send("convert-to-pdf-topic",
+                new ConvertFileToPdfEvent(UUID.randomUUID(), "testfile.txt"));
     }
 
-    @GetMapping("/get/png")
-    public String getPngFile() throws Exception {
-
-        fileConversionService.convertPngImage("png-photo.png");
-
-        return "demobucket/png-photo.pdf";
-    }
-
-    @GetMapping("/get/jpg")
-    public String getJpgFile() throws Exception {
-
-        fileConversionService.convertJpgImage("logo.jpeg");
-
-        return "demobucket/logo.pdf";
-    }
-
-    @GetMapping("/get/zip")
-    public String getZipFile() throws Exception {
-
-        return fileConversionService.convertZip("testzip.zip");
-
-//        return "demobucket/testzip.pdf";
-    }
 }

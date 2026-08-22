@@ -46,7 +46,7 @@ public class ZipToPdfConverter implements Converter {
         try (InputStream inputStream = data) {
             Files.copy(inputStream, tmp, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            return "fail tmp\n" + e.getMessage();
+            return "";
         }
         try (ZipFile zipFile = new ZipFile(tmp.toFile())) {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -73,7 +73,7 @@ public class ZipToPdfConverter implements Converter {
 
             return dir;
         } catch (IOException e) {
-            return "fail in ZipFile\n" + e.getMessage();
+            return "";
         } finally {
             try {
                 Files.deleteIfExists(tmp);

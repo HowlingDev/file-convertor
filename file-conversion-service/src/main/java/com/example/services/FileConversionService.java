@@ -4,34 +4,89 @@ import com.example.converters.Converter;
 import com.example.converters.ImageToPdfConverter;
 import com.example.converters.TxtToPdfConverter;
 import com.example.converters.ZipToPdfConverter;
+import com.example.entities.InboxEntity;
+import com.example.entities.OutboxEntity;
 import com.example.events.ConvertFileToPdfEvent;
-import lombok.AllArgsConstructor;
-import org.springframework.kafka.annotation.KafkaListener;
+import com.example.events.FileConversionEvent;
+import com.example.repositories.InboxRepository;
+import com.example.repositories.OutboxRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tools.jackson.databind.ObjectMapper;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FileConversionService {
 
-    MinioService minioService;
+    private final ObjectMapper objectMapper;
 
-    List<Converter> converters;
+    private final OutboxRepository outboxRepository;
 
-    @KafkaListener(topics = "convert-to-pdf-topic", groupId = "${spring.kafka.consumer.group-id}")
-    public void handleConvertFileToPdfEvent(ConvertFileToPdfEvent event) throws Exception {
-        for (Converter converter: converters) {
+    private final InboxRepository inboxRepository;
+
+    private final MinioService minioService;
+
+    private final List<Converter> converters;
+
+    @Transactional
+    public void convertFileToPdf(ConvertFileToPdfEvent event) {
+
+        if (inboxRepository.existsById(event.getEventId())) {
+            return;
+        }
+
+        OutboxEntity out = null;
+        String res = "";
+
+        for (Converter converter : converters) {
             int dotIndex = event.getFileUrl().lastIndexOf(".");
             String extension = event.getFileUrl().substring(dotIndex + 1);
             if (converter.supports(extension)) {
-                String res = converter.convertToPdf(minioService.download(event.getFileUrl()), event.getFileUrl());
-                System.out.println("файл сконвертирован");
+                try (InputStream inputStream = minioService.download(event.getFileUrl())) {
+                    res = converter.convertToPdf(inputStream, event.getFileUrl());
+                    try (InputStream fileInputStream = new FileInputStream(res)) {
+                        int ind = res.lastIndexOf("/");
+                        minioService.upload(fileInputStream, res.substring(ind + 1));
+                    }
+                } catch (IOException e) {
+                    out = OutboxEntity.builder()
+                            .event_id(UUID.randomUUID())
+                            .payload(objectMapper.writeValueAsString(
+                                    FileConversionEvent.builder()
+                                            .eventId(UUID.randomUUID())
+                                            .message("conversion failed")
+                                            .status(FileConversionEvent.Status.FAILED)
+                                            .build()
+                            ))
+                            .build();
+                }
+
             }
+            inboxRepository.save(new InboxEntity(event.getEventId()));
+            if (out == null) {
+                out = OutboxEntity.builder()
+                        .event_id(UUID.randomUUID())
+                        .payload(objectMapper.writeValueAsString(
+                                FileConversionEvent.builder()
+                                        .eventId(UUID.randomUUID())
+                                        .message(res.substring(res.lastIndexOf("/") + 1))
+                                        .status(FileConversionEvent.Status.CONVERTED)
+                                        .build()
+                        ))
+                        .build();
+            }
+            outboxRepository.save(out);
         }
     }
 
-    public void convertTxt(String fileName) throws Exception {
+    public void convertTxt(String fileName) {
         TxtToPdfConverter converter = new TxtToPdfConverter();
         int dotIndex = fileName.lastIndexOf(".");
         String extension = fileName.substring(dotIndex + 1);
@@ -41,7 +96,7 @@ public class FileConversionService {
         }
     }
 
-    public void convertPngImage(String fileName) throws Exception {
+    public void convertPngImage(String fileName) {
         ImageToPdfConverter converter = new ImageToPdfConverter();
         int dotIndex = fileName.lastIndexOf(".");
         String extension = fileName.substring(dotIndex + 1);
@@ -51,7 +106,7 @@ public class FileConversionService {
         }
     }
 
-    public void convertJpgImage(String fileName) throws Exception {
+    public void convertJpgImage(String fileName) {
         ImageToPdfConverter converter = new ImageToPdfConverter();
         int dotIndex = fileName.lastIndexOf(".");
         String extension = fileName.substring(dotIndex + 1);
@@ -61,7 +116,7 @@ public class FileConversionService {
         }
     }
 
-    public String convertZip(String fileName) throws Exception {
+    public String convertZip(String fileName) {
         ZipToPdfConverter converter = (ZipToPdfConverter) converters.stream()
                 .filter(converter1 -> converter1 instanceof ZipToPdfConverter)
                 .findFirst().orElseThrow();

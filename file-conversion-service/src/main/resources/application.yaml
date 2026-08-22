@@ -1,4 +1,6 @@
 server:
+  error:
+    include-message: always
   port: 0
 
 minio:
@@ -7,16 +9,37 @@ minio:
   secret-key: ${MINIO_SECRET_KEY:minioadmin}
   bucket: ${MINIO_BUCKET_NAME:demobucket}
 
+logging:
+  level:
+    org.springframework.kafka: INFO
+    org.apache.kafka: INFO
 spring:
   application:
     name: file-conversion-service
   kafka:
-    bootstrap-servers: localhost:9092, localhost:9094, localhost:9096
+    admin:
+      auto-create: false
     consumer:
+      bootstrap-servers: localhost:9092, localhost:9094, localhost:9096
       group-id: file-to-pdf
       enable-auto-commit: true
+      auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.example.events
     producer:
+      bootstrap-servers: localhost:9092, localhost:9094, localhost:9096
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      enable:
+        idempotence: true
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
