@@ -1,18 +1,18 @@
 package com.example.services;
 
 import com.example.events.ConvertFileToPdfEvent;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class KafkaFileListenerService {
 
-    private FileConversionService fileConversionService;
+    private final FileConversionService fileConversionService;
 
     @KafkaListener(
-            topics = "convert-to-pdf-topic",
+            topics = "${spring.kafka.topics.convert-event}",
             groupId = "${spring.kafka.consumer.group-id}"
     )
     public void handleConvertFileToPdfEvent(ConvertFileToPdfEvent event) {

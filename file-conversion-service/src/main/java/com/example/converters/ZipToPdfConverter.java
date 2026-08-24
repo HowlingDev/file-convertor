@@ -39,14 +39,14 @@ public class ZipToPdfConverter implements Converter {
 
         PDFMergerUtility pdfMerger = new PDFMergerUtility();
         pdfMerger.setDocumentMergeMode(PDFMergerUtility.DocumentMergeMode.OPTIMIZE_RESOURCES_MODE);
-        String dir = "C:/Users/user/Desktop/" + Converter.replaceExtension(fileName, "pdf");
-        pdfMerger.setDestinationFileName(dir);
+        Path dir = Path.of("files/" + Converter.replaceExtension(fileName, "pdf"));
+        pdfMerger.setDestinationFileName(dir.toString());
         List<String> files = new ArrayList<>();
-        Path tmp = Path.of("C:/Users/user/Desktop/tmp-" + Converter.replaceExtension(fileName, "zip"));
+        Path tmp = Path.of("files/tmp-" + fileName);
         try (InputStream inputStream = data) {
             Files.copy(inputStream, tmp, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            return "";
+            throw new RuntimeException();
         }
         try (ZipFile zipFile = new ZipFile(tmp.toFile())) {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
@@ -71,9 +71,9 @@ public class ZipToPdfConverter implements Converter {
                 Files.deleteIfExists(Path.of(file));
             }
 
-            return dir;
+            return dir.toString();
         } catch (IOException e) {
-            return "";
+            throw new RuntimeException();
         } finally {
             try {
                 Files.deleteIfExists(tmp);

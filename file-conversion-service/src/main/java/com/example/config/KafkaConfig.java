@@ -12,7 +12,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic createConvertToPdfTopic() {
-        return TopicBuilder.name("convert-to-pdf-topic")
+        return TopicBuilder.name("${spring.kafka.topics.convert-event}")
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas", "2"))
@@ -21,7 +21,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic createSuccessfulFileConversionTopic() {
-        return TopicBuilder.name("successful-file-conversion-topic")
+        return TopicBuilder.name("${spring.kafka.topics.success-event}")
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas", "2"))
@@ -30,7 +30,7 @@ public class KafkaConfig {
 
     @Bean
     public NewTopic createFailedFileConversionTopic() {
-        return TopicBuilder.name("failed-file-conversion-topic")
+        return TopicBuilder.name("${spring.kafka.topics.failed-event}")
                 .partitions(3)
                 .replicas(3)
                 .configs(Map.of("min.insync.replicas", "2"))

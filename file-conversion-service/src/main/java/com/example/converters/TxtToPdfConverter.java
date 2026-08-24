@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -73,11 +75,12 @@ public class TxtToPdfConverter implements Converter {
                 contentStream.close();
             }
 
-            String dir = "C:/Users/user/Desktop/" + Converter.replaceExtension(fileName, "pdf");
-            doc.save(new File(dir));
-            return dir;
+            Path dir = Path.of("files/" + Converter.replaceExtension(fileName, "pdf"));
+            Files.createDirectories(Path.of("files/"));
+            doc.save(dir.toFile());
+            return dir.toString();
         } catch (IOException e) {
-            return "";
+            throw new RuntimeException();
         }
     }
 

@@ -8,9 +8,10 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 @Component
@@ -36,11 +37,12 @@ public class ImageToPdfConverter implements Converter {
                 cont.drawImage(pdImage, 20, 20, (int) (pdImage.getWidth() * scale),
                         (int) (pdImage.getHeight() * scale));
             }
-            String dir = "C:/Users/user/Desktop/" + Converter.replaceExtension(fileName, "pdf");
-            doc.save(new File(dir));
-            return dir;
+            Path dir = Path.of("files/" + Converter.replaceExtension(fileName, "pdf"));
+            Files.createDirectories(Path.of("files/"));
+            doc.save(dir.toFile());
+            return dir.toString();
         } catch (IOException e) {
-            return "";
+            throw new RuntimeException();
         }
     }
 }

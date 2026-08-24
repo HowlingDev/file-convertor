@@ -20,6 +20,10 @@ spring:
   application:
     name: file-conversion-service
   kafka:
+    topics:
+      convert-event: convert-to-pdf-topic
+      success-event: successful-file-conversion-topic
+      failed-event: failed-file-conversion-topic
     admin:
       auto-create: false
     consumer:
@@ -45,4 +49,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml

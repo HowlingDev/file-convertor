@@ -9,7 +9,6 @@ import com.example.repositories.InboxRepository;
 import com.example.repositories.OutboxRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileInputStream;
@@ -23,14 +22,11 @@ import java.util.UUID;
 public class FileConversionService {
 
     private final OutboxRepository outboxRepository;
-
     private final InboxRepository inboxRepository;
-
     private final MinioService minioService;
-
     private final List<Converter> converters;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void convertFileToPdf(ConvertFileToPdfEvent event) {
 
         if (inboxRepository.existsById(event.getEventId())) {
