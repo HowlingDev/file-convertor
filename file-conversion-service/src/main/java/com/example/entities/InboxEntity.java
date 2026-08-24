@@ -23,10 +23,10 @@ public class InboxEntity {
     private UUID event_id;
 
     @Column(name = "processed_at", columnDefinition = "TIMESTAMPTZ NOT NULL DEFAULT now()")
-    private OffsetDateTime processed_at;
+    private OffsetDateTime processedAt;
 
     public InboxEntity(UUID event_id) {
         this.event_id = event_id;
-        this.processed_at = OffsetDateTime.now();
+        this.processedAt = OffsetDateTime.now();
     }
 }

@@ -30,8 +30,8 @@ public class OutboxEntity {
     private FileConversionEvent payload;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMPTZ NOT NULL DEFAULT now()")
-    private OffsetDateTime created_at;
+    private OffsetDateTime createdAt;
 
     @Column(name = "published_at")
-    private OffsetDateTime published_at;
+    private OffsetDateTime publishedAt;
 }
