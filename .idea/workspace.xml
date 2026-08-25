@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0380e33f-0f1c-428c-921f-965f00fbd611" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/config/KafkaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/InboxEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/InboxEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/OutboxEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/entities/OutboxEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/repositories/OutboxRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/repositories/OutboxRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/FileConversionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,26 +40,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.FileConversionServiceApplication.executor": "Run",
-    "Application.file-conversion-service.executor": "Debug",
-    "Maven.file-convertor [clean].executor": "Run",
-    "Maven.file-convertor [install].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.FileConversionServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.file-conversion-service.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.file-convertor [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.file-convertor [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\user\Desktop\file-convertor\file-conversion-service\src\main\java\com\example" />
@@ -120,7 +112,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="dev" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
