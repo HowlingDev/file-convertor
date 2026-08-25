@@ -16,6 +16,11 @@ logging:
     org.springframework.kafka.transaction: TRACE
     org.springframework.transaction: TRACE
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
 spring:
   application:
     name: file-conversion-service
