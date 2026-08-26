@@ -21,9 +21,9 @@ public class OutboxScheduler {
     private final KafkaTemplate<String, FileConversionEvent> kafkaTemplate;
     private final FileConversionService fileConversionService;
     @Value("${spring.kafka.topics.success-event}")
-    private String failedTopic;
-    @Value("${spring.kafka.topics.failed-event}")
     private String successTopic;
+    @Value("${spring.kafka.topics.failed-event}")
+    private String failedTopic;
 
     @Scheduled(fixedRate = 300000)
     @SchedulerLock(
@@ -38,9 +38,9 @@ public class OutboxScheduler {
         entities.forEach(entity -> {
                     FileConversionEvent event = entity.getPayload();
                     if (event.getStatus() == FileConversionEvent.Status.CONVERTED) {
-                        kafkaTemplate.send(failedTopic, event);
-                    } else {
                         kafkaTemplate.send(successTopic, event);
+                    } else {
+                        kafkaTemplate.send(failedTopic, event);
                     }
                 });
         fileConversionService.updateListEntities(entities);
