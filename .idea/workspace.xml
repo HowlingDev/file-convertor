@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0380e33f-0f1c-428c-921f-965f00fbd611" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +43,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.FileConversionServiceApplication.executor": "Run",
-    "Application.file-conversion-service.executor": "Run",
+    "Application.file-conversion-service.executor": "Debug",
     "Maven.file-convertor [clean].executor": "Run",
     "Maven.file-convertor [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -147,6 +147,16 @@
           <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java</url>
           <line>55</line>
           <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/schedulers/OutboxScheduler.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/file-conversion-service/src/main/java/com/example/services/KafkaFileListenerService.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ClassNotFoundException" package="java.lang" />
